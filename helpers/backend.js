@@ -24,3 +24,13 @@ export const getTotalSystemMoney = ()=> get("/transactions/total")
 //balance request
 export const patchBalanceRequest = (id, data)=> patch(`/transactions/balance-requests/${id}`, data)
 export const getAllBalanceRequest = ()=> get("/transactions/balance-requests")
+
+//users
+export const getUsers = (params) => get(`/users?${params}`)
+export const getUser = (id) => get(`/users/${id}`)
+export const patchUser = (id, data) => patch(`/users/${id}`, data)
+
+//agents
+export const getAgents = (params) => get(`/agents?${params}`)
+export const getAgent = (id) => get(`/agents/${id}`)
+export const patchAgent = (id, data) => patch(`/agents/${id}`, data)

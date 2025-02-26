@@ -4,16 +4,14 @@ import {
   patchBalanceRequest,
 } from "../../../helpers/backend";
 import Button from "../../components/Button";
-import { useState } from "react";
 import { toast } from "sonner";
-import ConfirmationAlert from "../../components/ConfirmationAlert";
+import Swal from "sweetalert2";
 
 const BalanceRequest = () => {
   const { data, isPending, refetch } = useQuery({
     queryKey: ["all_balance_requests"],
     queryFn: () => getAllBalanceRequest(),
   });
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   if (isPending) {
     return (
@@ -24,30 +22,32 @@ const BalanceRequest = () => {
   }
 
   const handleUpdateRequest = async (status, id) => {
-    try {
-      const result = await patchBalanceRequest(id, { status: status });
-      if (result?.success) {
-        toast.success("Balance Request Updated Successfully");
-        refetch()
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const result = await patchBalanceRequest(id, { status: status });
+          if (result?.success) {
+            toast.success("Balance Request Updated Successfully");
+            refetch();
+          }
+        } catch (error) {
+          toast.error(error.message);
+        }
       }
-    } catch (error) {
-      toast.error(error.message);
-    }
+    });
   };
 
-  const handleUpdate = () => {};
 
   return (
     <div className="mt-4">
-      <ConfirmationAlert
-        isOpen={isAlertOpen}
-        onConfirm={handleUpdate}
-        onCancel={() => setIsAlertOpen(false)}
-        title="Are You Sure?"
-        message="You Won't be able to revert this"
-        confirmText="Confirm"
-        cancelText="Cancel"
-      />
       <h1 className="text-2xl font-semibold mb-4">ALL BALANCE REQUESTS</h1>
       {data?.data?.map((request) => (
         <div
@@ -59,19 +59,22 @@ const BalanceRequest = () => {
           </div>
           {request.status !== "APPROVED" && request.status !== "DECLINED" ? (
             <div className="flex flex-col gap-1">
-              <Button className="bg-green-500 text-white px-2 py-1"
+              <Button
+                className="bg-green-500 text-white px-2 py-1"
                 onClick={() => handleUpdateRequest("APPROVED", request._id)}
               >
                 Approve
               </Button>
-              <Button 
-              className="bg-red-500 text-white px-2 py-1"
+              <Button
+                className="bg-red-500 text-white px-2 py-1"
                 onClick={() => handleUpdateRequest("DECLINED", request._id)}
               >
                 Decline
               </Button>
             </div>
-          ) : <p className="text-lg font-medium">{request.status}</p>}
+          ) : (
+            <p className="text-lg font-medium">{request.status}</p>
+          )}
         </div>
       ))}
       {!data?.data?.length && (

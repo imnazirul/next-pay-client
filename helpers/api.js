@@ -57,7 +57,11 @@ const axiosApi = axios.create({
     let { url: newUrl, data: newData } = updateRequest(url, data);
     return axiosApi
       .patch(newUrl, newData, { ...config })
-      .then((response) => response.data);
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error("🚀 ~ post ~ error:", error?.response);
+        throw error?.response?.data || "Something Went Wrong";
+      });
   }
   
   export async function del(url, config = {}) {

@@ -11,6 +11,8 @@ import CashIn from "../Pages/Agent/CashIn";
 import RequestMoney from "../Pages/Agent/RequestMoney";
 import AllTransaction from "../Pages/Admin/AllTransaction";
 import BalanceRequest from "../Pages/Admin/BalanceRequest";
+import Users from "../Pages/Admin/Users";
+import Agents from "../Pages/Admin/Agents";
 
 let router = createBrowserRouter([
   {
@@ -60,6 +62,14 @@ let router = createBrowserRouter([
       {
         path: "/transactions-admin",
         element: <PrivateRoute><AllTransaction/></PrivateRoute>
+      },
+      {
+        path: "/users",
+        element: <PrivateRoute><Users/></PrivateRoute>
+      },
+      {
+        path: "/agents",
+        element: <PrivateRoute><Agents/></PrivateRoute>
       }
     ],
   },
