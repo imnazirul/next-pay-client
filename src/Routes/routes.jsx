@@ -1,24 +1,32 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../Layout/Root";
 import Dashboard from "../Pages/Dashboard";
-// import SignIn from "../Pages/Auth/SignIn";
+import SignIn from "../Pages/Auth/SignIn";
 import SignUp from "../Pages/Auth/SignUp";
 
 let router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <Root />,
     children: [
       {
         path: "",
-        element: <SignUp/>
+        element: <SignIn />,
+      },
+      {
+        path: "sign_in",
+        element: <SignIn />,
+      },
+      {
+        path: "sign_up",
+        element: <SignUp />,
       },
       {
         path: "/dashboard",
-        element: <Dashboard/>,
+        element: <Dashboard />,
       },
     ],
   },
 ]);
 
-export default router
+export default router;

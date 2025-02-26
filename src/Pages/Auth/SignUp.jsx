@@ -5,6 +5,7 @@ import PhoneInput from "react-phone-input-2";
 import { useState } from "react";
 import PinInput from "../../components/PinInput";
 import Button from "../../components/Button";
+import { Link } from "react-router";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -31,7 +32,7 @@ const SignUp = () => {
   return (
     <div className="flex flex-col items-center h-[100vh]">
       <h1 className=" text-4xl text-center font-semibold h-12 my-4">Sign Up</h1>
-      <form onSubmit={handleSubmit} className="max-w-lg min-w-md space-y-3">
+      <form onSubmit={handleSubmit} className="max-w-md min-w-md space-y-3">
         <div className="flex flex-col gap-2">
           <label className="">Name</label>
           <Input
@@ -137,6 +138,7 @@ const SignUp = () => {
           Submit
         </Button>
       </form>
+      <p className="text-gray-500 mt-4">Already have an account? <Link className="text-blue-500 hover:underline" to="/sign_in">Sign In</Link></p>
     </div>
   );
 };
