@@ -9,6 +9,7 @@ import CashOut from "../Pages/User/CashOut";
 import Transactions from "../Pages/User/Transactions";
 import CashIn from "../Pages/Agent/CashIn";
 import RequestMoney from "../Pages/Agent/RequestMoney";
+import AllTransaction from "../Pages/Admin/AllTransaction";
 
 let router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ let router = createBrowserRouter([
       {
         path: "/transactions",
         element: <PrivateRoute><Transactions/></PrivateRoute>
+      },
+      {
+        path: "/transactions-admin",
+        element: <PrivateRoute><AllTransaction/></PrivateRoute>
       }
     ],
   },
