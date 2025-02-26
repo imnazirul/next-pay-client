@@ -39,7 +39,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto h-[100vh]">
       <div className="flex justify-between items-center mt-4 bg-blue-50 px-4 py-2 rounded-xl border border-blue-500">
         <div className="bg-blue-500 text-white px-2 py-1 rounded-md">
           <h1 className="font-medium py-1">{user?.name}</h1>
@@ -67,10 +67,11 @@ const Dashboard = () => {
           LogOut
         </Button>
       </div>
-
-      {user?.kind == "USER" && <UserDashboard />}
-      {user?.kind == "AGENT" && <AgentDashboard />}
-      {user?.kind == "ADMIN" && <AdminDashboard />}
+      <div>
+        {user?.kind == "USER" && <UserDashboard />}
+        {user?.kind == "AGENT" && <AgentDashboard />}
+        {user?.kind == "ADMIN" && <AdminDashboard />}
+      </div>
     </div>
   );
 };

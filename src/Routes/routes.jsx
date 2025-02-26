@@ -4,6 +4,9 @@ import Dashboard from "../Pages/Dashboard";
 import SignIn from "../Pages/Auth/SignIn";
 import SignUp from "../Pages/Auth/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SendMoney from "../Pages/User/SendMoney";
+import CashOut from "../Pages/User/CashOut";
+import Transactions from "../Pages/User/Transactions";
 
 let router = createBrowserRouter([
   {
@@ -26,6 +29,18 @@ let router = createBrowserRouter([
         path: "/dashboard",
         element: <PrivateRoute><Dashboard /></PrivateRoute>,
       },
+      {
+        path: "/send-money",
+        element: <PrivateRoute><SendMoney/></PrivateRoute>
+      },
+      {
+        path: "/cash-out",
+        element: <PrivateRoute><CashOut/></PrivateRoute>
+      },
+      {
+        path: "/transactions",
+        element: <PrivateRoute><Transactions/></PrivateRoute>
+      }
     ],
   },
 ]);

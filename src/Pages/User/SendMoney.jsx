@@ -18,7 +18,8 @@ const SendMoney = () => {
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     const fee = Number(transactionData.fee) > 100 ? 5 : 0;
     const data = {
       receiver_mobile: transactionData.receiver_mobile,
@@ -36,6 +37,8 @@ const SendMoney = () => {
       }
     } catch (error) {
       toast.error(error.message);
+    }finally{
+      setIsLoading(false)
     }
   };
 
