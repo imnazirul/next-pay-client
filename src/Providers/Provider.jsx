@@ -12,6 +12,7 @@ const Provider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const fetchUser = async () => {
+      setIsLoading(true)
       try {
         const user = await fetchUserProfile();
         setUser(user);
@@ -21,10 +22,13 @@ const Provider = ({ children }) => {
         setIsLoading(false);
       }
     };
+    fetchUser()
     if (token) {
-      fetchUser;
       setIsLoggedIn(true);
+    }else{
+      setIsLoggedIn(false)
     }
+    setIsLoading(false)
   }, []);
 
   const providerInfo = {

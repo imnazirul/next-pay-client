@@ -5,9 +5,10 @@ import PhoneInput from "react-phone-input-2";
 import { useState } from "react";
 import PinInput from "../../components/PinInput";
 import Button from "../../components/Button";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { postSignUp } from "../../../helpers/backend";
+import { useProvider } from "../../../context/ProviderContext";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -20,22 +21,27 @@ const SignUp = () => {
   });
   const [pin, setPin] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const { setUser, user } = useProvider();
+  const navigate = useNavigate()
+  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (pin?.split("")?.length !== 5) {
-      toast.error("Please Enter PIN");
+      return toast.error("Please Enter PIN");
     }
     setUserData({ ...userData, pin: pin });
     if (userData?.mobile?.split("")?.length < 11) {
-      toast.error("Please Enter Valid Phone");
+      return toast.error("Please Enter Valid Phone");
     }
     try {
       setIsLoading(true);
       const result = await postSignUp(userData);
       if (result.success) {
         toast.success("Sign Up Successful");
-        localStorage.setItem("token", result.data.token)
+        localStorage.setItem("token", result.data.token);
+        setUser(result.data);
+        navigate("/dashboard")
       }
     } catch (error) {
       toast.error(error.message);
@@ -86,7 +92,7 @@ const SignUp = () => {
               autoFocus: true,
             }}
             onlyCountries={["bd"]}
-            isValid={false}
+            isValid={true}
             inputStyle={{
               height: "44px",
               background: "transparent",

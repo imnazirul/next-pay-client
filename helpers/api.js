@@ -41,8 +41,8 @@ const axiosApi = axios.create({
         return response.data;
       })
       .catch((error) => {
-        console.error("🚀 ~ post ~ error:", error.response ? error.response.data : error.message);
-        throw error;
+        console.error("🚀 ~ post ~ error:", error?.response);
+        throw error?.response?.data || "Something Went Wrong";
       });
   }
   

@@ -3,6 +3,7 @@ import Root from "../Layout/Root";
 import Dashboard from "../Pages/Dashboard";
 import SignIn from "../Pages/Auth/SignIn";
 import SignUp from "../Pages/Auth/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 let router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ let router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
       },
     ],
   },
