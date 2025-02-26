@@ -27,6 +27,7 @@ const Provider = ({ children }) => {
   }, []);
 
   const providerInfo = {
+    setToken,
     token,
     isLoading,
     setIsLoading,

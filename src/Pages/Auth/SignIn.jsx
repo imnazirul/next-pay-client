@@ -15,20 +15,24 @@ const SignIn = () => {
   });
   const [pin, setPin] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const { setUser, token } = useProvider();
+  const { setUser, token, setToken } = useProvider();
   const navigate = useNavigate();
   const [isAlertOpen, setIsAlertOpen] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setUserData({ ...userData, pin: pin });
+    const data = {
+      identifier: userData.identifier,
+      pin: pin,
+    }
     try {
       setIsLoading(true);
-      const result = await postSignIn(userData);
+      const result = await postSignIn(data);
       if (result.success) {
         toast.success("Sign In Successful");
         localStorage.setItem("token", result.data.token);
         setUser(result.data.user);
+        setToken(result.data.token)
         navigate("/dashboard");
       }
     } catch (error) {

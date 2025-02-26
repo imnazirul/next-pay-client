@@ -21,26 +21,25 @@ const SignUp = () => {
   });
   const [pin, setPin] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const { setUser, user } = useProvider();
+  const { setUser, setToken, token } = useProvider();
   const navigate = useNavigate()
-  console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (pin?.split("")?.length !== 5) {
-      return toast.error("Please Enter PIN");
-    }
-    setUserData({ ...userData, pin: pin });
+ 
+    const data = {...userData, pin: pin}
+    
     if (userData?.mobile?.split("")?.length < 11) {
       return toast.error("Please Enter Valid Phone");
     }
     try {
       setIsLoading(true);
-      const result = await postSignUp(userData);
+      const result = await postSignUp(data);
       if (result.success) {
         toast.success("Sign Up Successful");
         localStorage.setItem("token", result.data.token);
-        setUser(result.data);
+        setUser(result.data.user);
+        setToken(result.data.token)
         navigate("/dashboard")
       }
     } catch (error) {
@@ -51,7 +50,6 @@ const SignUp = () => {
   };
 
    useEffect(()=>{
-      const token = localStorage.getItem("token")
       if(token) navigate("/dashboard")
     },[])
 
