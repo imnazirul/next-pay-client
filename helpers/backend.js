@@ -12,6 +12,7 @@ export const signOutWithToken = (data)=> post("/auth/token-sign-out", data)
 //transaction
 export const postTransaction = (data)=> post("/transactions", data)
 export const getTransactions = ()=> get("/transactions")
+export const getTransaction = (id)=> get(`/transactions/transactions/${id}`)
 export const getAllTransaction = ()=>get("/transactions/admin")
 
 //request money
@@ -34,3 +35,4 @@ export const patchUser = (id, data) => patch(`/users/${id}`, data)
 export const getAgents = (params) => get(`/agents?${params}`)
 export const getAgent = (id) => get(`/agents/${id}`)
 export const patchAgent = (id, data) => patch(`/agents/${id}`, data)
+

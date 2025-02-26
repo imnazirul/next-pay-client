@@ -13,6 +13,7 @@ import AllTransaction from "../Pages/Admin/AllTransaction";
 import BalanceRequest from "../Pages/Admin/BalanceRequest";
 import Users from "../Pages/Admin/Users";
 import Agents from "../Pages/Admin/Agents";
+import TransactionDetails from "../Pages/Admin/TransactionDetails";
 
 let router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ let router = createBrowserRouter([
       {
         path: "/agents",
         element: <PrivateRoute><Agents/></PrivateRoute>
+      },
+      {
+        path: "/transactions/:id",
+        element: <PrivateRoute><TransactionDetails/></PrivateRoute>
       }
     ],
   },

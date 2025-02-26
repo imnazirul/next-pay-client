@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllTransaction } from "../../../helpers/backend";
+import { useNavigate } from "react-router";
 
 const AllTransaction = () => {
   const { data, isPending } = useQuery({
     queryKey: ["all_transactions"],
     queryFn: () => getAllTransaction(),
   });
+  const navigate = useNavigate();
 
   if (isPending) {
     return (
@@ -19,8 +21,12 @@ const AllTransaction = () => {
     <div className="mt-4">
       <h1 className="text-2xl font-semibold mb-4">ALL TRANSACTIONS</h1>
       {data?.data?.map((transaction) => (
-        <div className="flex items-center gap-4 mb-2 justify-between bg-blue-100 p-2 rounded-lg border border-blue-400" key={transaction._id}>
-          <div className="" >
+        <div
+          onClick={() => navigate(`/transactions/${transaction._id}`)}
+          className="flex cursor-pointer items-center gap-4 mb-2 justify-between bg-blue-100 p-2 rounded-lg border border-blue-400"
+          key={transaction._id}
+        >
+          <div>
             <p>{transaction.kind}</p> <p>{transaction.transactionId}</p>
           </div>
           <div>
@@ -28,7 +34,11 @@ const AllTransaction = () => {
           </div>
         </div>
       ))}
-      {!data?.data?.length && <p className="text-xl mt-4 text-center font-medium">No Transaction Found!</p>}
+      {!data?.data?.length && (
+        <p className="text-xl mt-4 text-center font-medium">
+          No Transaction Found!
+        </p>
+      )}
     </div>
   );
 };
