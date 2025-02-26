@@ -2,7 +2,7 @@
 import { cn } from "../lib/utils";
 
 const Input = (
-  { className, placeholder, type, defaultValue, value, onChange }
+  { className, placeholder, type, defaultValue, value, onChange, required }
 ) => {
   return (
     <input
@@ -15,6 +15,7 @@ const Input = (
       )}
       value={value}
       onChange={onChange}
+      required={required}
     />
   );
 };

@@ -9,7 +9,7 @@ const PinInput = ({ value, setValue }) => {
         onChange={setValue}
         numInputs={5}
         renderSeparator={<span className="text-white">---</span>}
-        renderInput={(props) => <input {...props} />}
+        renderInput={(props) => <input required {...props} />}
         inputStyle="bg-transparent flex-1 text-black outline-none border border-gray-300 rounded-md py-2  w-14 focus:border-blue-500"
         inputType="number"
       />
