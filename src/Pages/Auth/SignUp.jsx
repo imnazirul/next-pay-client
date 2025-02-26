@@ -2,7 +2,7 @@ import Input from "../../components/Input";
 import "react-phone-input-2/lib/style.css";
 import "./PhoneInput.css";
 import PhoneInput from "react-phone-input-2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PinInput from "../../components/PinInput";
 import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router";
@@ -49,6 +49,11 @@ const SignUp = () => {
       setIsLoading(false);
     }
   };
+
+   useEffect(()=>{
+      const token = localStorage.getItem("token")
+      if(token) navigate("/dashboard")
+    },[])
 
   return (
     <div className="flex flex-col items-center h-[100vh]">

@@ -2,7 +2,7 @@ import { toast } from "sonner";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import PinInput from "../../components/PinInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { postSignIn, signOut } from "../../../helpers/backend";
 import { useProvider } from "../../../context/ProviderContext";
@@ -15,7 +15,7 @@ const SignIn = () => {
   });
   const [pin, setPin] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const { setUser } = useProvider();
+  const { setUser, token } = useProvider();
   const navigate = useNavigate();
   const [isAlertOpen, setIsAlertOpen] = useState(false)
 
@@ -28,7 +28,7 @@ const SignIn = () => {
       if (result.success) {
         toast.success("Sign In Successful");
         localStorage.setItem("token", result.data.token);
-        setUser(result.data);
+        setUser(result.data.user);
         navigate("/dashboard");
       }
     } catch (error) {
@@ -52,6 +52,11 @@ const SignIn = () => {
       toast.error(error.message)
     }
   }
+
+  useEffect(()=>{
+    if(token) navigate("/dashboard")
+  },[])
+
   return (
     <div className="flex flex-col items-center h-[100vh]">
        <ConfirmationAlert

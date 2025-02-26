@@ -3,7 +3,7 @@ import { Navigate } from "react-router";
 import { useProvider } from "../../context/ProviderContext";
 
 const PrivateRoute = ({ children }) => {
-  const { user, isLoading } = useProvider();
+  const {  isLoading, token } = useProvider();
   if (isLoading) {
     return (
       <div className="flex h-[100vh] justify-center items-center">
@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
-  if (user) {
+  if (token) {
     return children;
   }
   return <Navigate to="/sign_in"></Navigate>;
