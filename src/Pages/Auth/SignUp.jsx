@@ -6,6 +6,8 @@ import { useState } from "react";
 import PinInput from "../../components/PinInput";
 import Button from "../../components/Button";
 import { Link } from "react-router";
+import { toast } from "sonner";
+import { postSignUp } from "../../../helpers/backend";
 
 const SignUp = () => {
   const [userData, setUserData] = useState({
@@ -17,16 +19,29 @@ const SignUp = () => {
     pin: "",
   });
   const [pin, setPin] = useState();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userData);
-    console.log(pin);
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 2000);
+    if (pin?.split("")?.length !== 5) {
+      toast.error("Please Enter PIN");
+    }
+    setUserData({ ...userData, pin: pin });
+    if (userData?.mobile?.split("")?.length < 11) {
+      toast.error("Please Enter Valid Phone");
+    }
+    try {
+      setIsLoading(true);
+      const result = await postSignUp(userData);
+      if (result.success) {
+        toast.success("Sign Up Successful");
+        localStorage.setItem("token", result.data.token)
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -138,7 +153,12 @@ const SignUp = () => {
           Submit
         </Button>
       </form>
-      <p className="text-gray-500 mt-4">Already have an account? <Link className="text-blue-500 hover:underline" to="/sign_in">Sign In</Link></p>
+      <p className="text-gray-500 mt-4">
+        Already have an account?{" "}
+        <Link className="text-blue-500 hover:underline" to="/sign_in">
+          Sign In
+        </Link>
+      </p>
     </div>
   );
 };

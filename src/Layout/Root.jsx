@@ -7,7 +7,7 @@ const Root = () => {
     <div className=" w-full ">
       <Navbar />
       <div className="overflow-x-hidden">
-        <Toaster />
+        <Toaster richColors position="top-right"/>
         <div className="space-y-5 lg:space-y-10">
           <div className="container mx-auto font-poppins px-5 lg:px-10 ">
             <Outlet />
