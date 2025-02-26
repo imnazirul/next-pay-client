@@ -8,3 +8,7 @@ export const postSignIn = (data) => post("/auth/sign-in",data )
 export const fetchUserProfile = ()=> get("/users/me")
 export const signOut = (data)=> post("/auth/sign-out", data)
 export const signOutWithToken = (data)=> post("/auth/token-sign-out", data)
+
+//transaction
+export const postTransaction = (data)=> post("/transactions", data)
+export const getTransactions = ()=> get("/transactions")
