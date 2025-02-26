@@ -1,4 +1,4 @@
-import { get, post } from "./api";
+import { get, patch, post } from "./api";
 
 
 
@@ -20,3 +20,7 @@ export const getAgentRequestMoney = ()=> get("/transactions/balance-requests-age
 
 //total money
 export const getTotalSystemMoney = ()=> get("/transactions/total")
+
+//balance request
+export const patchBalanceRequest = (id, data)=> patch(`/transactions/balance-requests/${id}`, data)
+export const getAllBalanceRequest = ()=> get("/transactions/balance-requests")

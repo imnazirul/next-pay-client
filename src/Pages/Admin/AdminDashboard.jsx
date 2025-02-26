@@ -16,7 +16,7 @@ const AdminDashboard = () => {
   return (
     <div className="grid grid-cols-3 gap-8 justify-between mt-8 ">
       <div
-        onClick={() => navigate("/balance-request")}
+        onClick={() => navigate("/balance-requests")}
         className="bg-blue-100 border flex-1 max-w-sm py-8 cursor-pointer hover:scale-105 transition-all duration-300 flex justify-center flex-col items-center border-blue-400 rounded-md"
       >
         <img
