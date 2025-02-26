@@ -4,8 +4,9 @@ import Input from "../../components/Input";
 import PinInput from "../../components/PinInput";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { postSignIn } from "../../../helpers/backend";
+import { postSignIn, signOut } from "../../../helpers/backend";
 import { useProvider } from "../../../context/ProviderContext";
+import ConfirmationAlert from "../../components/ConfirmationAlert";
 
 const SignIn = () => {
   const [userData, setUserData] = useState({
@@ -16,6 +17,7 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { setUser } = useProvider();
   const navigate = useNavigate();
+  const [isAlertOpen, setIsAlertOpen] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,12 +33,36 @@ const SignIn = () => {
       }
     } catch (error) {
       toast.error(error.message);
+      if(error.message == "User Already Logged in with another device"){
+       setIsAlertOpen(true)
+      }
     } finally {
       setIsLoading(false);
     }
   };
+
+  const handleConfirm = async()=>{
+    try {
+      const result = await signOut(userData)
+      if(result.success){
+        toast.success(result.message)
+        setIsAlertOpen(false)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
   return (
     <div className="flex flex-col items-center h-[100vh]">
+       <ConfirmationAlert
+        isOpen={isAlertOpen}
+        onConfirm={handleConfirm}
+        onCancel={()=>setIsAlertOpen(false)}
+        title="Logout from other device?"
+        message="User is Already Logged In With Another Device"
+        confirmText="Yes, Logout"
+        cancelText="No, cancel"
+      />
       <h1 className=" text-4xl text-center font-semibold h-12 my-8 ">
         Welcome Back!
       </h1>
@@ -47,11 +73,11 @@ const SignIn = () => {
         <div className="flex flex-col gap-2">
           <label className="">Email or Mobile</label>
           <Input
-            value={userData.email}
+            value={userData.identifier}
             onChange={(e) => {
               setUserData((prev) => ({
                 ...prev,
-                email: e.target.value,
+                identifier: e.target.value,
               }));
             }}
             type="text"

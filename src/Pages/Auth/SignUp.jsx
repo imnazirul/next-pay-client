@@ -108,7 +108,7 @@ const SignUp = () => {
             onChange={(value) => {
               setUserData((prev) => ({
                 ...prev,
-                mobile: `${value}`,
+                mobile: `+${value}`,
               }));
             }}
             enableSearch={true}

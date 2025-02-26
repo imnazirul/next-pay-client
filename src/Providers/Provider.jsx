@@ -6,7 +6,7 @@ import { fetchUserProfile } from "../../helpers/backend";
 
 const Provider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("hell world");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
