@@ -1,39 +1,22 @@
 /* eslint-disable react/prop-types */
 import { cn } from "../lib/utils";
-import "./input.css";
-import { forwardRef } from "react";
 
-const Input = forwardRef(
-  (
-    {
-      className,
-      placeholder,
-      type,
-      defaultValue,
-      value,
-      onChange,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <input
-        ref={ref}
-        type={type}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        className={cn(
-          "bg-transparent outline-none placeholder:text-[#EAECF0]",
-          className
-        )}
-        {...props}
-        value={value}
-        onChange={onChange}
-      />
-    );
-  }
-);
-
-Input.displayName = "Input";
+const Input = (
+  { className, placeholder, type, defaultValue, value, onChange }
+) => {
+  return (
+    <input
+      type={type}
+      defaultValue={defaultValue}
+      placeholder={placeholder}
+      className={cn(
+        "bg-transparent outline-none border border-gray-300 rounded-md py-2 px-4 focus:border-blue-500 placeholder:text-gray-400",
+        className
+      )}
+      value={value}
+      onChange={onChange}
+    />
+  );
+};
 
 export default Input;
