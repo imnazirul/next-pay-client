@@ -2,7 +2,7 @@
 const UserDashboard = () => {
     return (
         <div>
-            
+            user
         </div>
     );
 };

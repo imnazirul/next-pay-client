@@ -46,8 +46,12 @@ const SignIn = () => {
   };
 
   const handleConfirm = async()=>{
+    const data = {
+      identifier: userData.identifier,
+      pin: pin,
+    }
     try {
-      const result = await signOut(userData)
+      const result = await signOut(data)
       if(result.success){
         toast.success(result.message)
         setIsAlertOpen(false)
