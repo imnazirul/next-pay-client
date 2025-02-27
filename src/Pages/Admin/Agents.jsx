@@ -108,7 +108,7 @@ const Agents = () => {
                       </Button>
                       <Button
                         className="px-0 py-1 bg-green-500 text-white"
-                        onClick={() => handleBlockUser(user._id, "APPROVED")}
+                        onClick={() => handleBlockUser(user._id, "ACTIVE")}
                       >
                         APPROVE
                       </Button>
