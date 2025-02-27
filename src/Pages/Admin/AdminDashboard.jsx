@@ -30,7 +30,7 @@ const AdminDashboard = () => {
         className="bg-blue-100 border flex-1 max-w-sm py-8 cursor-pointer hover:scale-105 transition-all duration-300 flex justify-center flex-col items-center border-blue-400 rounded-md"
       >
         <img
-          src="/cash-money.png"
+          src="/user.png"
           className="w-28 h-28 object-contain text-center mx-auto"
         />
         <h1 className="font-medium text-center">Users</h1>
@@ -40,7 +40,7 @@ const AdminDashboard = () => {
         className="bg-blue-100 border flex-1 max-w-sm py-8 cursor-pointer hover:scale-105 transition-all duration-300 flex justify-center flex-col items-center border-blue-400 rounded-md"
       >
         <img
-          src="/transaction.png"
+          src="/user.png"
           className="w-28 h-28 object-contain text-center mx-auto"
         />
         <h1 className="font-medium text-center">Agents</h1>

@@ -42,7 +42,7 @@ const Agents = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Confirm",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -81,14 +81,14 @@ const Agents = () => {
         </form>
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="min-w-full text-center bg-white border border-gray-200">
           <thead>
             <tr className="bg-gray-50">
-              <th className="border-b px-4 py-2 text-left">Name</th>
-              <th className="border-b px-4 py-2 text-left">Email</th>
-              <th className="border-b px-4 py-2 text-left">Mobile</th>
-              <th className="border-b px-4 py-2 text-left">Status</th>
-              <th className="border-b px-4 py-2 text-left">Action</th>
+              <th className="border-b px-4 py-2 ">Name</th>
+              <th className="border-b px-4 py-2">Email</th>
+              <th className="border-b px-4 py-2">Mobile</th>
+              <th className="border-b px-4 py-2">Status</th>
+              <th className="border-b px-4 py-2">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -98,21 +98,21 @@ const Agents = () => {
                 <td className="border-b px-4 py-2">{user.email}</td>
                 <td className="border-b px-4 py-2">{user.mobile}</td>
                 <td className="border-b px-4 py-2">{user.status}</td>
-                <td className="border-b px-4 py-2 flex items-center gap-1">
+                <td className="border-b px-4 py-2 text-center">
                   {user.status == "PENDING" ? (
-                    <>
-                      <Button className="px-0 py-0"
+                    <div className="flex justify-center items-center gap-1">
+                      <Button className="px-0 py-1 bg-red-500 text-white"
                         onClick={() => handleBlockUser(user._id, "CANCELLED")}
                       >
                         DECLINE
                       </Button>
                       <Button
-                        className="px-0 py-0"
+                        className="px-0 py-1 bg-green-500 text-white"
                         onClick={() => handleBlockUser(user._id, "APPROVED")}
                       >
                         APPROVE
                       </Button>
-                    </>
+                    </div>
                   ): <p>{user.status}</p>}
                    
                 </td>

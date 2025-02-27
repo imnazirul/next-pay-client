@@ -83,14 +83,14 @@ const Users = () => {
         </form>
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="min-w-full text-center bg-white border border-gray-200">
           <thead>
             <tr className="bg-gray-50">
-              <th className="border-b px-4 py-2 text-left">Name</th>
-              <th className="border-b px-4 py-2 text-left">Email</th>
-              <th className="border-b px-4 py-2 text-left">Mobile</th>
-              <th className="border-b px-4 py-2 text-left">Status</th>
-              <th className="border-b px-4 py-2 text-left">Action</th>
+              <th className="border-b px-4 py-2">Name</th>
+              <th className="border-b px-4 py-2">Email</th>
+              <th className="border-b px-4 py-2">Mobile</th>
+              <th className="border-b px-4 py-2">Status</th>
+              <th className="border-b px-4 py-2">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -102,7 +102,7 @@ const Users = () => {
                 <td className="border-b px-4 py-2">{user.status}</td>
                 <td className="border-b px-4 py-2">
                   {user.status !== "CANCELLED" && (
-                    <Button onClick={() => handleBlockUser(user._id)}>
+                    <Button className="py-1" onClick={() => handleBlockUser(user._id)}>
                       Block
                     </Button>
                   )}

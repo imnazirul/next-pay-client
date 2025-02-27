@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosApi = axios.create({
-    baseURL: 'http://localhost:5500/api/v1'
+    baseURL: 'https://next-pay-eight.vercel.app/api/v1'
   });
   
   axiosApi.interceptors.request.use((config) => {
