@@ -4,6 +4,7 @@ import PinInput from "../../components/PinInput";
 import Button from "../../components/Button";
 import { toast } from "sonner";
 import { postTransaction } from "../../../helpers/backend";
+import { useProvider } from "../../../context/ProviderContext";
 
 const CashIn = () => {
   const [transactionData, setTransactionData] = useState({
@@ -16,9 +17,12 @@ const CashIn = () => {
   });
   const [pin, setPin] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const { user } = useProvider();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(user.status !== "ACTIVE"){
+     return toast.error("Your Account may be not Authorized for this Action")
+    }
     const data = {
       receiver_mobile: transactionData.receiver_mobile,
       amount: transactionData.amount,
@@ -41,9 +45,7 @@ const CashIn = () => {
   };
   return (
     <div className="flex flex-col items-center h-[100vh]">
-      <h1 className=" text-4xl text-center font-semibold h-12 my-4">
-        Cash In
-      </h1>
+      <h1 className=" text-4xl text-center font-semibold h-12 my-4">Cash In</h1>
       <form onSubmit={handleSubmit} className="max-w-md min-w-md space-y-3">
         <div className="flex flex-col gap-2">
           <label className="">User Mobile Number</label>

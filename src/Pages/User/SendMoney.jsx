@@ -4,6 +4,7 @@ import PinInput from "../../components/PinInput";
 import Button from "../../components/Button";
 import { toast } from "sonner";
 import { postTransaction } from "../../../helpers/backend";
+import { useProvider } from "../../../context/ProviderContext";
 
 const SendMoney = () => {
   const [transactionData, setTransactionData] = useState({
@@ -16,10 +17,13 @@ const SendMoney = () => {
   });
   const [pin, setPin] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const { user } = useProvider();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    if (user.status !== "ACTIVE") {
+      return toast.error("Your Account may be not Authorized for this Action");
+    }
     const fee = Number(transactionData.fee) > 100 ? 5 : 0;
     const data = {
       receiver_mobile: transactionData.receiver_mobile,
@@ -37,8 +41,8 @@ const SendMoney = () => {
       }
     } catch (error) {
       toast.error(error.message);
-    }finally{
-      setIsLoading(false)
+    } finally {
+      setIsLoading(false);
     }
   };
 

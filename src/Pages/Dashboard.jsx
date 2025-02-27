@@ -42,18 +42,18 @@ const Dashboard = () => {
     <div className="container mx-auto h-[100vh]">
       <div className="flex justify-between items-center mt-4 bg-blue-50 px-4 py-2 rounded-xl border border-blue-500">
         <div className="bg-blue-500 text-white px-2 py-1 rounded-md">
-          <h1 className="font-medium py-1">{user?.name}</h1>
+          <h1 className="font-medium py-1">Name: {user?.name}</h1>
         </div>
         <div className="font-medium text-lg">
           {isBalanceShow ? (
-            <p className="text-lg bg-blue-500 font-medium px-6 py-1 w-40 rounded-md text-white text-center">
+            <p className="text-lg bg-blue-500  font-medium px-6 py-1 w-40 rounded-md text-white text-center">
               Balance: {user?.balance}
             </p>
           ) : (
             <Button
               isLoading={isBalanceLoading}
               onClick={handleSeeBalance}
-              className="py-1.5"
+              className="py-1.5 min-w-40"
             >
               See Balance
             </Button>
